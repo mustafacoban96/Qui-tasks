@@ -10,6 +10,8 @@ import { LIMIT_DAY } from '../globalValue/globalValue';
 import LinearProgress from '@mui/material/LinearProgress';
 import { dateCalcutor } from '../dateCalculator/dateCalculator';
 import { deliveryBook } from '../actions/action';
+import HourglassTopIcon from '@mui/icons-material/HourglassTop';
+import HourglassFullIcon from '@mui/icons-material/HourglassFull';
 
 
 const max = LIMIT_DAY;
@@ -41,11 +43,21 @@ const UserSide = (props) => {
                 <Typography marginTop='10px' marginBottom='10px' variant="body2" color="text.secondary">
                   {book.yazar}
                 </Typography>
-                <Typography variant='p'>{dateCalcutor(book.delivery_date)} days</Typography>
                 {
                   dateCalcutor(book.delivery_date) >= LIMIT_DAY ?
-                  <LinearProgress variant="determinate" color='error' value={normalise(LIMIT_DAY)} sx={{height:'10px'}}/> :
-                  <LinearProgress color={dateCalcutor(book.delivery_date) >= 15 ? 'warning':'success'} variant="determinate" value={normalise(dateCalcutor(book.delivery_date))} sx={{height:'10px'}}/>
+                  (
+                    <>
+                    <Typography variant='p'>{dateCalcutor(book.delivery_date)} days <HourglassFullIcon/></Typography>
+                    <LinearProgress variant="determinate" color='error' value={normalise(LIMIT_DAY)} sx={{height:'10px'}}/> 
+                    </>
+                  ):
+                  (
+                    <>
+                    <Typography variant='p'>{dateCalcutor(book.delivery_date)} days <HourglassTopIcon/></Typography>
+                     <LinearProgress color={dateCalcutor(book.delivery_date) >= 15 ? 'warning':'success'} variant="determinate" value={normalise(dateCalcutor(book.delivery_date))} sx={{height:'10px'}}/>
+                    </>
+                  )
+                 
                   
                 }
               </CardContent>
@@ -67,7 +79,7 @@ const UserSide = (props) => {
                 >
                 Deliver
               </Button> :
-              <Button disabled size="small"  variant='contained' 
+              <Button disabled size="small"  variant='contained' endIcon={<HourglassTopIcon/>}
               sx={{
                 color:'white',
                 backgroundColor:'#dd2c00',

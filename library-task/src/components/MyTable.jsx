@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,14 +7,16 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { connect } from 'react-redux';
-import { CardMedia, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import LinearProgress from '@mui/material/LinearProgress';
 import { dateCalcutor } from '../dateCalculator/dateCalculator';
 import { LIMIT_DAY } from '../globalValue/globalValue';
 import { deliveryState } from '../deliveryChechker/deliveryChecker';
 import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
 import { verifyBook,lendBook } from '../actions/action';
+import HourglassTopIcon from '@mui/icons-material/HourglassTop';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 
 const max = LIMIT_DAY;
@@ -83,18 +85,18 @@ const MyTable = (props) => {
                       onClick={() => lendedClick(book.id)}
                       variant="contained" 
                       color='success'
-                      endIcon={<SendIcon />}>LEND</Button> :
+                      endIcon={<DoneAllIcon />}>LEND</Button> :
                       <Button 
                       onClick={() => verifyClick(book.id)}
                       variant="contained" 
                       color='warning'
-                      endIcon={<SendIcon />}>VERIFY</Button>
+                      endIcon={<HourglassTopIcon/>}>VERIFY</Button>
                       )
                      :
                     <Button 
                     disabled
                     variant="contained" 
-                    endIcon={<SendIcon />}>WAITING</Button>
+                    endIcon={<AccessTimeIcon />}>WAITING</Button>
                   }
                   
                   </TableCell>
